@@ -14,7 +14,7 @@ router.post("/", (req, res) => {
   const { name, price, status } = req.body;
   db.query(
     "INSERT INTO product (name, price, status) VALUES (?, ?, ?)",
-    [mame, price, status],
+    [name, price, status],
     (err, result) => {
       if (err) return res.status(500).json(err);
       return res.json({ id: result.insertId, name, price, status });
@@ -22,7 +22,7 @@ router.post("/", (req, res) => {
   );
 });
 
-router.update("/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   const { id } = req.params;
   const { name, price, status } = req.body;
   db.query(
@@ -30,16 +30,9 @@ router.update("/:id", (req, res) => {
     [name, price, status, id],
     (err) => {
       if (err) return res.status(500).json(err);
-      return res.json({ message: "Product updated" });
+      return res.json({ message: "Product updated successfully" });
     },
   );
 });
 
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  db.query("DELETE FROM product WHERE id = ?", [id], (err) => {
-    if (err) return res.status(500).json(err);
-    return res.json({ message: "Product deleted" });
-  });
-});
 export default router;
