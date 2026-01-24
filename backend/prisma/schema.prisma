@@ -41,3 +41,10 @@ model Product {
   price  Int
   status ProductStatus
 }
+
+model Anime {
+  id     Int    @id @default(autoincrement())
+  name   String
+  genre  String
+  rating Int
+}

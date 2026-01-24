@@ -30,9 +30,17 @@ router.put("/:id", (req, res) => {
     [name, price, status, id],
     (err) => {
       if (err) return res.status(500).json(err);
-      return res.json({ message: "Product updated successfully" });
+      return res.json({ message: "Product updated" });
     },
   );
+});
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("DELETE FROM product WHERE id = ?", [id], (err) => {
+    if (err) return res.status(500).json(err);
+    return res.json({ message: "Product deleted" });
+  });
 });
 
 export default router;
